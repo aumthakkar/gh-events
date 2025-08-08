@@ -3,8 +3,19 @@ on:
   pull_request:
     types:
       - opened
+    branches:
+      - main
+      - 'dev-*' # For ex this allows push to dev-new, dev-this-is-new etc.
+      - 'feat-**' # This allows push to branches with more slashes too like for ex feat/new, feat/new/button etc.
 
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 'dev-*' # For ex this allows push to dev-new, dev-this-is-new etc.
+      - 'feat-**' # This allows push to branches with more slashes too like for ex feat/new, feat/new/button etc.
+
+    paths-ignore:
+      - '.github/workflows/*' # Will trigger if push occurs to any of the above push branches and as long as this path is not changed
 
 jobs:
   deploy:
